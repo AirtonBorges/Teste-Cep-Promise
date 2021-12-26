@@ -5,13 +5,14 @@ import { NgxMaskModule, IConfig } from 'ngx-mask'
 
 import { AppComponent } from './app.component';
 import { CepSearchComponent } from './cep-search/cep-search.component';
+import { CepInfoComponent } from './cep-info/cep-info.component';
 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
   imports: [BrowserModule, FormsModule, NgxMaskModule.forRoot()],
-  declarations: [AppComponent, CepSearchComponent],
+  declarations: [AppComponent, CepSearchComponent, CepInfoComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
