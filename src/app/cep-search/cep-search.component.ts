@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import cep, { CEP } from 'cep-promise';
+import { CepServiceService } from '../cep-service.service';
 
 @Component({
   selector: 'cep-search',
@@ -11,7 +13,8 @@ export class CepSearchComponent implements OnInit {
   text = '';
   cepData: CEP;
 
-  constructor() {}
+  constructor(private _cepService: CepServiceService,
+    private _router: Router) {}
 
   ngOnInit() {}
 
@@ -20,5 +23,8 @@ export class CepSearchComponent implements OnInit {
     const cepParsed = cepValue.replace('-', '');
     
     this.cepData = await cep(cepParsed);
+    this._cepService.setCep(this.cepData);
+    this._router.navigate(['/heroes']);
+    console.log(this.cepData);
   }
 }

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CEP } from 'cep-promise';
+import { CepServiceService } from '../cep-service.service';
+
 
 @Component({
   selector: 'app-cep-info',
@@ -6,8 +9,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cep-info.component.css']
 })
 export class CepInfoComponent implements OnInit {
-  constructor() { }
+  cepData: CEP;
+  
+  constructor(private _cepService: CepServiceService) { }
 
   ngOnInit(): void {
+    this.cepData = this._cepService.getCep();
   }
 }
