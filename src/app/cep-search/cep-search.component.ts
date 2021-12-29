@@ -24,7 +24,7 @@ export class CepSearchComponent implements OnInit {
     
     this.cepData = await cep(cepParsed);
     this._cepService.setCep(this.cepData);
-    this._router.navigate(['/heroes']);
+    this._router.navigate(['/cep-info']);
     console.log(this.cepData);
   }
 }
