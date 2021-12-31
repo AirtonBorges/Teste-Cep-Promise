@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import cep, { CEP } from 'cep-promise';
+import { CEP } from 'cep-promise'
 import { CepServiceService } from '../cep-service.service';
+import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'cep-search',
@@ -13,18 +15,26 @@ export class CepSearchComponent implements OnInit {
   text = '';
   cepData: CEP;
 
-  constructor(private _cepService: CepServiceService,
-    private _router: Router) {}
+  constructor(
+    private _cepService: CepServiceService,
+    private _router: Router,
+    private http: HttpClient) {}
 
   ngOnInit() {}
 
   async callCep(e: Event) {
     const cepValue = (e.target as HTMLInputElement).value;
-    const cepParsed = cepValue.replace('-', '');
+    const cepParsed = Number(cepValue.replace('-', ''));
     
-    this.cepData = await cep(cepParsed);
-    this._cepService.setCep(this.cepData);
+    this.http.get<CEP>(`https://brasilapi.com.br/api/cep/v1/${cepParsed}`).subscribe(
+      resultado => {
+        this._cepService.setCep(resultado);
+      }
+    );
+
+    console.log(this._cepService.getCep());
+    
+    
     this._router.navigate(['/cep-info']);
-    console.log(this.cepData);
   }
 }

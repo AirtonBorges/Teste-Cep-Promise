@@ -10,6 +10,8 @@ export class CepServiceService {
   constructor() { }
 
   public setCep(pCep: CEP) {
+    console.log(pCep);
+    
     this.cep = pCep;
   }
 

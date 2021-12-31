@@ -1,3 +1,16 @@
+.content-container {
+    display: flex;
+
+    flex-direction: column;
+    justify-content: center;
+}
+
+.map {
+    background-color: blue;
+    height: 50%;
+    width: 100%;
+}
+
 .cep-info {
     display: flex;
 

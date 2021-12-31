@@ -8,12 +8,13 @@ import { CepInfoComponent } from './cep-info/cep-info.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { APP_BASE_HREF } from '@angular/common';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
+import { HttpClientModule } from '@angular/common/http';
 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, NgxMaskModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, FormsModule, NgxMaskModule.forRoot(), AppRoutingModule, HttpClientModule],
   declarations: [AppComponent, CepSearchComponent, CepInfoComponent],
   providers: [{provide: APP_BASE_HREF, useValue : '/' }],
   bootstrap: [AppComponent],
