@@ -1,21 +1,16 @@
 import { Injectable } from '@angular/core';
 import { CEP } from 'cep-promise';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CepServiceService {
-  private cep:CEP;
+  private cepSource = new BehaviorSubject<CEP>(null);
+  cep = this.cepSource.asObservable();
 
   constructor() { }
 
   public setCep(pCep: CEP) {
-    console.log(pCep);
-    
-    this.cep = pCep;
-  }
-
-  public getCep(): CEP {
-    return this.cep;
-  }
-}
+    this.cepSource.next(pCep);
+  }}

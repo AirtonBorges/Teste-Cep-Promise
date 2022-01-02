@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CEP } from 'cep-promise'
-import { CepServiceService } from '../cep-service.service';
+import { CepServiceService as CepService } from '../cep-service.service';
 import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs';
 
 @Component({
   selector: 'cep-search',
@@ -14,13 +13,34 @@ export class CepSearchComponent implements OnInit {
   cepMask = '00000-000';
   text = '';
   cepData: CEP;
+  cep = '';
 
   constructor(
-    private _cepService: CepServiceService,
+    private _cepService: CepService,
     private _router: Router,
     private http: HttpClient) {}
 
-  ngOnInit() {}
+  ngOnInit(
+  ) {
+    this._cepService.cep.subscribe(cepAtual => {
+      this.cepData = cepAtual;
+    });
+
+    this.formatCepTemplate();
+  }
+
+  private formatCepTemplate() {
+    const unformatedCep = this.cepData?.cep;
+    
+    if (!unformatedCep) {
+      this.cep = '';
+      return;
+    }
+    
+    const formatedCep = unformatedCep.slice(0, 5) + '-' + unformatedCep.slice(5);
+    
+    this.cep = formatedCep;
+  }
 
   async callCep(e: Event) {
     const cepValue = (e.target as HTMLInputElement).value;
@@ -31,9 +51,6 @@ export class CepSearchComponent implements OnInit {
         this._cepService.setCep(resultado);
       }
     );
-
-    console.log(this._cepService.getCep());
-    
     
     this._router.navigate(['/cep-info']);
   }

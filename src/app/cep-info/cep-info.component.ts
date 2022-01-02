@@ -14,6 +14,10 @@ export class CepInfoComponent implements OnInit {
   constructor(private _cepService: CepServiceService) { }
 
   ngOnInit(): void {
-    this.cepData = this._cepService.getCep();
+    this._cepService.cep.subscribe(cepAtual => {
+      this.cepData = cepAtual;
+    });
+
+    console.log(this.cepData);
   }
 }
