@@ -1,10 +1,14 @@
 <div class="search-container">
   <label #description for="input">CEP</label>
-  <input
-    #input
-    [mask]="cepMask"
-    (keyup.enter)="callCep($event)"
-    type="text"
-    [placeholder]="cep"
-  />
+  
+  <form [formGroup]="cepForm">
+    <input
+        #input
+        [mask]="cepMask"
+        (keyup.enter)="callCep()"
+        type="text"
+        [placeholder]="cep"
+        formControlName="cep"
+      />
+  </form>
 </div>

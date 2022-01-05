@@ -2,15 +2,15 @@
     <div class="map">
     </div>
 
-    <div class="cep-info">
+    <form [formGroup]="cepForm" (keyup.enter)="callCep()">
         <div class="city">
             <label for="city-input">Cidade</label>
-            <input id="city-input" type="text" placeholder="{{cepData?.city}}">
+            <input id="city-input" formControlName="city" type="text" placeholder="{{cepData?.city}}">
         </div>
         <div class="state">
             <label for="state-input">Estado</label>
-            <input id="state-input" type="text" placeholder="{{cepData?.state}}">
+            <input id="state-input" formControlName="state" type="text" placeholder="{{cepData?.state}}">
         </div>
-    </div>
+    </form>
 </div>
 

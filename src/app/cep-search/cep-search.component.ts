@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CEP } from 'cep-promise'
 import { CepServiceService as CepService } from '../cep-service.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'cep-search',
@@ -14,11 +15,14 @@ export class CepSearchComponent implements OnInit {
   text = '';
   cepData: CEP;
   cep = '';
+  cepForm: FormGroup;
 
   constructor(
     private _cepService: CepService,
     private _router: Router,
-    private http: HttpClient) {}
+    private _http: HttpClient,
+    private _fb: FormBuilder
+  ) {}
 
   ngOnInit(
   ) {
@@ -27,31 +31,42 @@ export class CepSearchComponent implements OnInit {
     });
 
     this.formatCepTemplate();
+
+    this.cepForm = this._fb.group({
+      cep: ''
+    })
   }
 
   private formatCepTemplate() {
-    const unformatedCep = this.cepData?.cep;
+    const CepFromData = this.cepData?.cep;
     
-    if (!unformatedCep) {
+    if (!CepFromData) {
       this.cep = '';
       return;
     }
     
-    const formatedCep = unformatedCep.slice(0, 5) + '-' + unformatedCep.slice(5);
+    if (!CepFromData.match('00000000')) {
+      this.cep = CepFromData;
+      return;
+    }
+
+    const formatedCep = CepFromData.slice(0, 5) + '-' + CepFromData.slice(5);
     
     this.cep = formatedCep;
   }
 
-  async callCep(e: Event) {
-    const cepValue = (e.target as HTMLInputElement).value;
+  async callCep() {
+    const cepValue = this.cepForm.value.cep;
+    console.log(cepValue);
+    
     const cepParsed = Number(cepValue.replace('-', ''));
     
-    this.http.get<CEP>(`https://brasilapi.com.br/api/cep/v1/${cepParsed}`).subscribe(
+    this._http.get<CEP>(`https://brasilapi.com.br/api/cep/v1/${cepParsed}`).subscribe(
       resultado => {
         this._cepService.setCep(resultado);
       }
     );
     
-    this._router.navigate(['/cep-info']);
+    this._router.navigateByUrl('/cep-info');
   }
 }
