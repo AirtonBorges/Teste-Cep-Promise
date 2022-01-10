@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CEP } from 'cep-promise';
 import { CepServiceService } from '../cep-service.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { catchError } from 'rxjs/internal/operators/catchError';
 
 @Component({
   selector: 'app-cep-info',
@@ -29,17 +30,15 @@ export class CepInfoComponent implements OnInit {
       city: '',
       state: ''
     })
-    console.log(this.cepData);
   }
 
   async callCep() {
     const endereco = this.cepForm.value;
 
-    this.http.get<JSON>(`https://viacep.com.br/ws/${endereco.state}/${endereco.city}/json/`).subscribe(
+    this.http.get<JSON>(`https://viacep.com.br/ws/${endereco.state}/${endereco.city}/json/`)
+    .subscribe(
       resultado => {
         const temp = resultado[0];
-        
-        console.log(resultado);
 
         this._cepService.setCep({
           cep: temp.cep,
@@ -49,6 +48,6 @@ export class CepInfoComponent implements OnInit {
       }
     );
     
-    this._router.navigate(['/cep-search']);
+    this._router.navigateByUrl('/cep-search');
   }
 }

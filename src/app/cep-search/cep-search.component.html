@@ -1,14 +1,14 @@
 <div class="search-container">
   <label #description for="input">CEP</label>
   
-  <form [formGroup]="cepForm">
+  <form [formGroup]="cepForm" (keyup.enter)="callCep()">
     <input
         #input
         [mask]="cepMask"
-        (keyup.enter)="callCep()"
         type="text"
         [placeholder]="cep"
         formControlName="cep"
+        autofocus
       />
   </form>
 </div>

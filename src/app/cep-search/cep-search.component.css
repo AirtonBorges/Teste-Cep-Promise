@@ -2,14 +2,9 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 10px;
 }
 
 label {
   font-size: 30px;
 }
 
-
-input {
-  width: 40vw;
-}

@@ -1,8 +1,8 @@
-<div class="content-container">
+<div class="info-container">
     <div class="map">
     </div>
 
-    <form [formGroup]="cepForm" (keyup.enter)="callCep()">
+    <form class="address-form" [formGroup]="cepForm" (keyup.enter)="callCep()">
         <div class="city">
             <label for="city-input">Cidade</label>
             <input id="city-input" formControlName="city" type="text" placeholder="{{cepData?.city}}">
@@ -13,4 +13,3 @@
         </div>
     </form>
 </div>
-

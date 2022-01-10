@@ -16,7 +16,6 @@ import { APP_BASE_HREF } from '@angular/common';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { HttpClientModule } from '@angular/common/http';
 
-
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
@@ -27,7 +26,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     HttpClientModule,
     ReactiveFormsModule, 
     BrowserAnimationsModule,
-    MatInputModule
+    MatInputModule,
   ],
   declarations: [AppComponent, CepSearchComponent, CepInfoComponent],
   providers: [{provide: APP_BASE_HREF, useValue : '/' }],

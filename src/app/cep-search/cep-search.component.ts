@@ -26,45 +26,26 @@ export class CepSearchComponent implements OnInit {
 
   ngOnInit(
   ) {
-    this._cepService.cep.subscribe(cepAtual => {
-      this.cepData = cepAtual;
-    });
-
-    this.formatCepTemplate();
-
     this.cepForm = this._fb.group({
       cep: ''
     })
+
+    this._cepService.cep.subscribe(cepAtual => {
+      this.cepData = cepAtual;
+      this.cep = this.cepData?.cep ?? '';
+    });
   }
 
-  private formatCepTemplate() {
-    const CepFromData = this.cepData?.cep;
-    
-    if (!CepFromData) {
-      this.cep = '';
-      return;
-    }
-    
-    if (!CepFromData.match('00000000')) {
-      this.cep = CepFromData;
-      return;
-    }
-
-    const formatedCep = CepFromData.slice(0, 5) + '-' + CepFromData.slice(5);
-    
-    this.cep = formatedCep;
-  }
 
   async callCep() {
     const cepValue = this.cepForm.value.cep;
-    console.log(cepValue);
-    
+
     const cepParsed = Number(cepValue.replace('-', ''));
     
     this._http.get<CEP>(`https://brasilapi.com.br/api/cep/v1/${cepParsed}`).subscribe(
       resultado => {
         this._cepService.setCep(resultado);
-      }
+      },
     );
     
     this._router.navigateByUrl('/cep-info');

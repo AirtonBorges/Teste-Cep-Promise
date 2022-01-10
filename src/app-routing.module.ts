@@ -5,8 +5,8 @@ import { CepInfoComponent } from './app/cep-info/cep-info.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/cep-search', pathMatch: 'full' },
-  { path: 'cep-search', component: CepSearchComponent },
-  { path: 'cep-info', component: CepInfoComponent }
+  { path: 'cep-search', component: CepSearchComponent, data: { animation: 'isCepSearch'}},
+  { path: 'cep-info', component: CepInfoComponent, data: { animation: 'isCepInfo'}}
 ];
 
 @NgModule({

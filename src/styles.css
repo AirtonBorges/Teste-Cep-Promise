@@ -1,22 +1,26 @@
+main {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  height: 100%;
+  width: 100%;
+  
+  background-image: linear-gradient(
+    rgb(75, 187, 75),
+    rgb(116, 177, 116)
+  )
+}
+
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 p {
   font-family: Lato;
-}
-
-main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-image: linear-gradient(
-    rgb(75, 187, 75),
-    rgb(116, 177, 116)
-  );
 }
 
 label {
