@@ -1,3 +1,9 @@
-# angular-ivy-fqcjp2
+# Projeto pra testar o cep-promice/Brasil API
+- Angular
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/angular-ivy-fqcjp2)
+## Implementar no futuro:
+- Lista de ceps checados
+- Auth
+- Back em DotNet
+
+site na Vercel: https://teste-cep-promise.vercel.app/cep-search
