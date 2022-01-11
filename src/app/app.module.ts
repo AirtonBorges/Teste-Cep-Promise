@@ -15,18 +15,20 @@ import { CepInfoComponent } from './cep-info/cep-info.component';
 import { APP_BASE_HREF } from '@angular/common';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { HttpClientModule } from '@angular/common/http';
+import { AlertMessageModule } from './alert-message/alert-message.module';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
-  imports: [BrowserModule, 
-    FormsModule, 
-    NgxMaskModule.forRoot(), 
+  imports: [
+    BrowserModule, 
+    FormsModule,
+    AlertMessageModule,
+    NgxMaskModule.forRoot(),
     AppRoutingModule, 
     HttpClientModule,
     ReactiveFormsModule, 
-    BrowserAnimationsModule,
-    MatInputModule,
+    BrowserAnimationsModule
   ],
   declarations: [AppComponent, CepSearchComponent, CepInfoComponent],
   providers: [{provide: APP_BASE_HREF, useValue : '/' }],

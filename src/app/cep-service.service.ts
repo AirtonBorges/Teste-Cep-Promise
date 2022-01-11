@@ -13,4 +13,5 @@ export class CepServiceService {
 
   public setCep(pCep: CEP) {
     this.cepSource.next(pCep);
-  }}
+  }
+}
