@@ -16,6 +16,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertMessageModule } from './alert-message/alert-message.module';
+import { AlertService } from './alert-message/alert.service';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -31,8 +32,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     BrowserAnimationsModule
   ],
   declarations: [AppComponent, CepSearchComponent, CepInfoComponent],
-  providers: [{provide: APP_BASE_HREF, useValue : '/' }],
-  bootstrap: [AppComponent],
+  providers: [{provide: APP_BASE_HREF, useValue : '/'}, AlertService ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
 

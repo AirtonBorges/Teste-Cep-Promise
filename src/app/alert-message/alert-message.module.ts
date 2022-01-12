@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     NgbModule
   ],
-  declarations: [AlertMessageComponent]
+  declarations: [AlertMessageComponent],
+  exports: [AlertMessageComponent]
 })
 export class AlertMessageModule { }

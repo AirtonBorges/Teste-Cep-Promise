@@ -1,4 +1,8 @@
 <main [@routeAnimations]="prepareRoute(outlet)">
-  <router-outlet #outlet="outlet"></router-outlet>
-  <alert-message></alert-message>
+  <div class="outlet-container">
+    <router-outlet #outlet="outlet"></router-outlet>
+  </div>
+  <div class="alert-container">  
+    <alert-message></alert-message>
+  </div>
 </main>
